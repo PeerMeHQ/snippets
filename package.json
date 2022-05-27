@@ -21,6 +21,7 @@
     "@elrondnetwork/erdjs-hw-provider": "^2.0.1",
     "@elrondnetwork/erdjs-network-providers": "^0.1.5",
     "@elrondnetwork/erdjs-walletcore": "^1.0.0",
+    "bignumber.js": "^9.0.2",
     "fs": "^0.0.1-security",
     "path": "^0.12.7"
   }

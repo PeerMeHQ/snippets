@@ -6,8 +6,8 @@ const Network: Network = 'devnet'
 const SignerWallet = 'defi-wallet.pem'
 const Input = 'snapshot.json'
 
-// params: token id
-// params: amount
+// param 1: token id
+// param 2: amount
 const main = async () => {
   const tokenId = getArg(0)
   const amount = getArg(1)
