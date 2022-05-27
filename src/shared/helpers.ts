@@ -57,3 +57,5 @@ export const timeout = async (milliseconds: number, log = true) => {
 
   await new Promise(r => setTimeout(r, milliseconds))
 }
+
+export const printSeparator = () => console.log('--------------------------------------------------')

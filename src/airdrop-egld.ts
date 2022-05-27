@@ -1,6 +1,6 @@
 import { Network } from './shared/types'
 import { Address, TokenPayment } from '@elrondnetwork/erdjs'
-import { getArg, loadJsonData, loadSigner, setup, timeout } from './shared/helpers'
+import { getArg, loadJsonData, loadSigner, printSeparator, setup, timeout } from './shared/helpers'
 
 const Network: Network = 'devnet'
 const SignerWallet = 'defi-wallet.pem'
@@ -15,12 +15,14 @@ const main = async () => {
 
   const payment = TokenPayment.egldFromAmount(amount)
 
+  printSeparator()
   console.log('Network: ' + Network.toUpperCase() + ` (Url: ${config.ApiUrl})`)
   console.log('Sender: ' + account.address + ` (Nonce: ${account.nonce.valueOf()})`)
   console.log('Amount: ' + payment.toPrettyString())
   console.log('Receivers: ' + receivers.length)
+  printSeparator()
 
-  await timeout(2_000)
+  await timeout(10_000)
 
   for (const receiver of receivers) {
     const tx = txFactory.createEGLDTransfer({
