@@ -36,7 +36,7 @@ const main = async () => {
     await signer.sign(tx)
     await provider.sendTransaction(tx)
 
-    console.log(`sent ${payment.toRationalNumber()} to ${receiver} (hash: ${tx.getHash()})`)
+    console.log(`sent ${payment.toPrettyString()} to ${receiver}`)
     await timeout(200, false)
   }
 
