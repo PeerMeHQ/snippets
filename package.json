@@ -1,0 +1,24 @@
+{
+  "name": "superciety--snippets",
+  "version": "1.0.0",
+  "description": "useful snippets for interacting with the elrond blockchain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/superciety/snippets.git"
+  },
+  "author": "micha vie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/superciety/snippets/issues"
+  },
+  "homepage": "https://github.com/superciety/snippets#readme",
+  "dependencies": {
+    "@elrondnetwork/erdjs": "^10.2.5",
+    "@elrondnetwork/erdjs-hw-provider": "^2.0.1",
+    "@elrondnetwork/erdjs-walletcore": "^1.0.0"
+  }
+}
