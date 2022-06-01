@@ -10,7 +10,7 @@ export const getArg = (index: number) => process.argv.slice(2)[index]
 
 export const setup = async (network: Network) => {
   const config = getConfig(network)
-  const provider = new ApiNetworkProvider(config.ApiUrl, { timeout: 5000 })
+  const provider = new ApiNetworkProvider(config.ApiUrl, { timeout: 10000 })
   const networkConfig = await provider.getNetworkConfig()
 
   const gasEstimator = new GasEstimator()
