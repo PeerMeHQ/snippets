@@ -22,6 +22,7 @@ const main = async () => {
   console.log('Network: ' + Network.toUpperCase() + ` (Url: ${config.ApiUrl})`)
   console.log('Sender: ' + account.address + ` (Nonce: ${account.nonce.valueOf()})`)
   console.log('Amount: ' + payment.toPrettyString())
+  console.log('Amount (Total): ' + +amount * receivers.length)
   console.log('Receivers: ' + receivers.length)
   printSeparator()
 
@@ -40,7 +41,7 @@ const main = async () => {
     await provider.sendTransaction(tx)
 
     console.log(`sent ${payment.toPrettyString()} to ${receiver}`)
-    await timeout(200, false)
+    await timeout(250, false)
   }
 
   console.log('done!')

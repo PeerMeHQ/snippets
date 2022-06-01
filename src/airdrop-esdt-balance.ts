@@ -12,7 +12,7 @@ const Input = 'snapshot.json'
 // param 2: reserve amount - how many of the tokens to leave in the account
 const main = async () => {
   const tokenId = getArg(0)
-  const reserveAmount = getArg(1)
+  const reserveAmount = +getArg(1) || 0
   const { config, provider, networkConfig, txFactory } = await setup(Network)
   const { signer, account } = await loadSigner(provider, SignerWallet)
   const receivers = collect(<string[]>loadJsonData(Input))
@@ -24,14 +24,13 @@ const main = async () => {
 
   const reserveBig = new BigNumber(reserveAmount).shiftedBy(tokenDefinition.decimals)
   const availableAmount = tokenAccount.balance.minus(reserveBig)
-  const amountPerIndividual = availableAmount.div(new BigNumber(receivers.length))
+  const amountPerIndividual = availableAmount.div(new BigNumber(receivers.length)).toNumber()
 
   const payment = TokenPayment.fungibleFromBigInteger(tokenId, amountPerIndividual, tokenDefinition.decimals)
 
   printSeparator()
   console.log('Network: ' + Network.toUpperCase() + ` (Url: ${config.ApiUrl})`)
   console.log('Sender: ' + account.address + ` (Nonce: ${account.nonce.valueOf()})`)
-  console.log('Amount: ' + payment.toPrettyString())
   console.log('Receivers: ' + receivers.length)
   printSeparator()
   console.log('Reserved: ' + reserveAmount)
