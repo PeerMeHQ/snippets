@@ -1,3 +1,4 @@
+import collect from 'collect.js'
 import { Network } from './shared/types'
 import { Address, TokenPayment } from '@elrondnetwork/erdjs'
 import { getArg, loadJsonData, loadSigner, printSeparator, setup, timeout } from './shared/helpers'
@@ -11,7 +12,9 @@ const main = async () => {
   const amount = getArg(0)
   const { config, provider, networkConfig, txFactory } = await setup(Network)
   const { signer, account } = await loadSigner(provider, SignerWallet)
-  const receivers = <string[]>loadJsonData(Input)
+  const receivers = collect(<string[]>loadJsonData(Input))
+    .unique()
+    .all()
 
   const payment = TokenPayment.egldFromAmount(amount)
 

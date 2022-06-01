@@ -1,3 +1,4 @@
+import collect from 'collect.js'
 import BigNumber from 'bignumber.js'
 import { Network } from './shared/types'
 import { Address, TokenPayment } from '@elrondnetwork/erdjs'
@@ -14,7 +15,9 @@ const main = async () => {
   const reserveAmount = getArg(1)
   const { config, provider, networkConfig, txFactory } = await setup(Network)
   const { signer, account } = await loadSigner(provider, SignerWallet)
-  const receivers = <string[]>loadJsonData(Input)
+  const receivers = collect(<string[]>loadJsonData(Input))
+    .unique()
+    .all()
 
   const tokenDefinition = await provider.getDefinitionOfFungibleToken(tokenId)
   const tokenAccount = await provider.getFungibleTokenOfAccount(account.address, tokenId)
