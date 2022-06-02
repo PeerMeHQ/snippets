@@ -8,7 +8,7 @@ const main = async () => {
   const tokenId = getArg(0)
   const { provider } = await setup(Network)
 
-  const accounts: TokenAccount[] = await provider.doGetGeneric(`tokens/${tokenId}/accounts`)
+  const accounts: TokenAccount[] = await provider.doGetGeneric(`tokens/${tokenId}/accounts?size=10000`)
   const fileName = `snapshot_${getTodayDateFileNameSegment()}_${tokenId}.json`
 
   saveJsonData(fileName, accounts)
