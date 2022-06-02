@@ -5,8 +5,8 @@ import { Address, TokenPayment } from '@elrondnetwork/erdjs'
 import { getArg, loadJsonData, loadSigner, printSeparator, setup, timeout } from './shared/helpers'
 
 const Network: Network = 'devnet'
-const SignerWallet = 'defi-wallet.pem'
-const Input = 'snapshot.json'
+const SignerWallet = 'distributor.pem'
+const Input = 'participants.json'
 
 // param 1: token id
 // param 2: reserve amount - how many of the tokens to leave in the account
