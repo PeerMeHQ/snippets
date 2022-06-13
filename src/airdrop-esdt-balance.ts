@@ -24,7 +24,7 @@ const main = async () => {
 
   const reserveBig = new BigNumber(reserveAmount).shiftedBy(tokenDefinition.decimals)
   const availableAmount = tokenAccount.balance.minus(reserveBig)
-  const amountPerIndividual = availableAmount.div(new BigNumber(receivers.length)).toNumber()
+  const amountPerIndividual = availableAmount.div(new BigNumber(receivers.length)).toFixed(0)
 
   const payment = TokenPayment.fungibleFromBigInteger(tokenId, amountPerIndividual, tokenDefinition.decimals)
 
