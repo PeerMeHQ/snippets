@@ -4,7 +4,16 @@ import { getConfig } from './config'
 import { readFileSync, writeFileSync } from 'fs'
 import { UserSigner } from '@elrondnetwork/erdjs-walletcore'
 import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers'
-import { TransactionFactory, GasEstimator, Account } from '@elrondnetwork/erdjs'
+import {
+  Account,
+  Address,
+  TypedValue,
+  GasEstimator,
+  ResultsParser,
+  SmartContract,
+  ContractFunction,
+  TransactionFactory,
+} from '@elrondnetwork/erdjs'
 
 export const getArg = (index: number) => process.argv.slice(2)[index]
 
@@ -16,11 +25,23 @@ export const setup = async (network: Network) => {
   const gasEstimator = new GasEstimator()
   const txFactory = new TransactionFactory(gasEstimator)
 
+  const querySc = async (address: string, func: string, args: TypedValue[]) => {
+    const contract = new SmartContract({ address: new Address(address) })
+    const query = contract.createQuery({
+      func: new ContractFunction(func),
+      args,
+      caller: new Address(address),
+    })
+    const response = await provider.queryContract(query)
+    return new ResultsParser().parseUntypedQueryResponse(response).values
+  }
+
   return {
     config,
     provider,
     networkConfig,
     txFactory,
+    querySc,
   }
 }
 
