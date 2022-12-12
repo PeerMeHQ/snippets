@@ -2,6 +2,8 @@ import { Network } from '../shared/types'
 import { loadSigner, printSeparator, setup, timeout } from '../shared/helpers'
 import { Address, AddressValue, ContractFunction, Interaction, SmartContract } from '@elrondnetwork/erdjs'
 
+// ts-node src/superciety/fellowships-upgrade-all.ts
+
 const Network: Network = 'devnet'
 const SignerWallet = 'distributor.pem'
 const ManagerScAddress = ''
@@ -30,13 +32,27 @@ const main = async () => {
       .buildTransaction()
 
     await signer.sign(tx)
-    await provider.sendTransaction(tx)
+    unwrapErrorsOrForward(async () => await provider.sendTransaction(tx))
 
-    console.log(`sent upgrade request to ${contract}`)
+    console.log(`sent upgrade request for ${contract}`)
     await timeout(250, false)
   }
 
   console.log('done!')
+}
+
+const unwrapErrorsOrForward = async (func: () => any) => {
+  try {
+    await func()
+  } catch (err) {
+    const error = err as any
+    if (error?.inner?.response) {
+      console.log('----------------------------------------')
+      console.log('❌', error.inner.response)
+      console.log('----------------------------------------')
+    }
+    throw err
+  }
 }
 
 main()
