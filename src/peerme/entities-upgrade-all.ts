@@ -2,7 +2,7 @@ import { Network } from '../shared/types'
 import { loadSigner, printSeparator, setup, timeout } from '../shared/helpers'
 import { Address, AddressValue, ContractFunction, Interaction, SmartContract } from '@elrondnetwork/erdjs'
 
-// ts-node src/superciety/fellowships-upgrade-all.ts
+// ts-node src/peerme/entities-upgrade-all.ts
 
 const Network: Network = 'devnet'
 const SignerWallet = 'distributor.pem'
