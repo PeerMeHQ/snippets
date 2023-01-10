@@ -1,5 +1,3 @@
-import fs from 'fs'
-import path from 'path'
 import collect from 'collect.js'
 import { getArg, loadJsonData, saveJsonData } from './shared/helpers'
 import { Address } from '@elrondnetwork/erdjs/out'
