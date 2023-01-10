@@ -3,10 +3,10 @@ import path from 'path'
 import collect from 'collect.js'
 import { getArg, loadJsonData, saveJsonData } from './shared/helpers'
 
-// ts-node src/snapshot-merger.ts
+// ts-node src/snapshot-merge.ts
 
 // arg 1: input directory
-// arg 1: output file
+// arg 2: output file
 const main = async () => {
   const inputDir = getArg(0)
   const outputFile = getArg(1)
