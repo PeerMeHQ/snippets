@@ -1,4 +1,4 @@
-# Elrond Snippets
+# Helpful Snippets for MultiversX Blockchain
 
 ## Requirements
 
