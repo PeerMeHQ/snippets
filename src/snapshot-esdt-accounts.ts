@@ -1,7 +1,7 @@
 import { Network, TokenAccount } from './shared/types'
 import { getArg, getTodayDateFileNameSegment, saveJsonData, setup } from './shared/helpers'
 
-// ts-node src/snapshot-esdt-holders.ts
+// ts-node src/snapshot-esdt-accounts.ts
 
 const Network: Network = 'devnet'
 
