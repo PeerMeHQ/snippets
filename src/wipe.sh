@@ -2,7 +2,7 @@ CHAIN_ID=D
 PROXY=https://devnet-gateway.elrond.com
 ESDT_SC_ADDRESS=erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u
 
-# paras:
+# params:
 #   $1 = token id
 #   $2 = address
 wipe() {
