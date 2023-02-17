@@ -5,15 +5,15 @@ type Config = {
 }
 
 const MainnetConfig: Config = {
-  ApiUrl: 'https://api.elrond.com',
+  ApiUrl: 'https://api.multiversx.com',
 }
 
 const TestnetConfig: Config = {
-  ApiUrl: 'https://testnet-api.elrond.com',
+  ApiUrl: 'https://testnet-api.multiversx.com',
 }
 
 const DevnetConfig: Config = {
-  ApiUrl: 'https://devnet-api.elrond.com',
+  ApiUrl: 'https://devnet-api.multiversx.com',
 }
 
 export const getConfig = (network: Network) => {
