@@ -1,11 +1,10 @@
-import { Network } from './shared/types'
 import { getArg, saveJsonData } from './shared/helpers'
 import { Mnemonic } from '@elrondnetwork/erdjs-walletcore/out'
 
-const Network: Network = 'devnet'
+// ts-node src/generate-fake-snapshot.ts {amount}
+
 const Output = 'snapshot.json'
 
-// params: amount
 const main = async () => {
   const amount = +getArg(0)
 
