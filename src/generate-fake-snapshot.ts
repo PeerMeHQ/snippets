@@ -1,5 +1,5 @@
 import { getArg, saveJsonData } from './shared/helpers'
-import { Mnemonic } from '@elrondnetwork/erdjs-walletcore/out'
+import { Mnemonic } from '@multiversx/sdk-core-walletcore/out'
 
 // ts-node src/generate-fake-snapshot.ts {amount}
 
@@ -10,14 +10,11 @@ const main = async () => {
 
   console.log(`generating ${amount} fake addresses...`)
 
-  const generatePubKey = () =>
-    Mnemonic.generate()
-      .deriveKey(0)
-      .generatePublicKey()
+  const generatePubKey = () => Mnemonic.generate().deriveKey(0).generatePublicKey()
 
   const randomAddresses = Array.from({ length: amount })
     .map(generatePubKey)
-    .map(key => key.toAddress().bech32())
+    .map((key) => key.toAddress().bech32())
 
   saveJsonData(Output, randomAddresses)
 

@@ -1,6 +1,6 @@
 import { Network } from '../shared/types'
 import { loadSigner, printSeparator, setup, timeout } from '../shared/helpers'
-import { Address, AddressValue, ContractFunction, Interaction, SmartContract } from '@elrondnetwork/erdjs'
+import { Address, AddressValue, ContractFunction, Interaction, SmartContract } from '@multiversx/sdk-core'
 
 // ts-node src/peerme/entities-upgrade-all.ts
 
@@ -12,7 +12,7 @@ const main = async () => {
   const { config, provider, networkConfig, querySc } = await setup(Network)
   const { signer, account } = await loadSigner(provider, SignerWallet)
 
-  const contracts = (await querySc(ManagerScAddress, 'getEntities', [])).map(buffer => Address.fromBuffer(buffer).bech32())
+  const contracts = (await querySc(ManagerScAddress, 'getEntities', [])).map((buffer) => Address.fromBuffer(buffer).bech32())
 
   printSeparator()
   console.log('Network: ' + Network.toUpperCase() + ` (Url: ${config.ApiUrl})`)
@@ -27,11 +27,15 @@ const main = async () => {
 
     const tx = new Interaction(sc, new ContractFunction('upgradeEntity'), args)
       .withChainID(networkConfig.ChainID)
+      .withSender(signer.getAddress())
       .withGasLimit(50_000_000)
       .withNonce(account.getNonceThenIncrement())
       .buildTransaction()
 
-    await signer.sign(tx)
+    const serialized = tx.serializeForSigning()
+    const signature = await signer.sign(serialized)
+    tx.applySignature(signature)
+
     unwrapErrorsOrForward(async () => await provider.sendTransaction(tx))
 
     console.log(`sent upgrade request for ${contract}`)

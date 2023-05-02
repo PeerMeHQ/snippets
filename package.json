@@ -17,12 +17,12 @@
   },
   "homepage": "https://github.com/superciety/snippets#readme",
   "dependencies": {
-    "@elrondnetwork/erdjs": "^10.2.5",
-    "@elrondnetwork/erdjs-hw-provider": "^2.0.1",
-    "@elrondnetwork/erdjs-network-providers": "^0.1.5",
-    "@elrondnetwork/erdjs-walletcore": "^1.0.0",
-    "bignumber.js": "^9.0.2",
-    "collect.js": "^4.33.0",
+    "@multiversx/sdk-core": "12.1.0",
+    "@multiversx/sdk-core-hw-provider": "^2.0.1",
+    "@multiversx/sdk-network-providers": "^1.4.0",
+    "@multiversx/sdk-wallet": "^4.0.0",
+    "bignumber.js": "^9.1.1",
+    "collect.js": "^4.36.1",
     "fs": "^0.0.1-security",
     "path": "^0.12.7"
   }

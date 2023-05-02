@@ -1,6 +1,6 @@
 import collect from 'collect.js'
 import { Network } from './shared/types'
-import { Address, TokenPayment } from '@elrondnetwork/erdjs'
+import { Address, TokenPayment } from '@multiversx/sdk-core'
 import { getArg, loadJsonData, loadSigner, printSeparator, setup, timeout } from './shared/helpers'
 
 const Network: Network = 'devnet'
@@ -37,7 +37,10 @@ const main = async () => {
       chainID: networkConfig.ChainID,
     })
 
-    await signer.sign(tx)
+    const serialized = tx.serializeForSigning()
+    const signature = await signer.sign(serialized)
+    tx.applySignature(signature)
+
     await provider.sendTransaction(tx)
 
     console.log(`sent ${payment.toPrettyString()} to ${receiver}`)

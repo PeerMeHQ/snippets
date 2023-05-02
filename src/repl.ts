@@ -1,6 +1,6 @@
 import { Network } from './shared/types'
 import { loadSigner, setup } from './shared/helpers'
-import { Transaction, TransactionPayload } from '@elrondnetwork/erdjs/out'
+import { Transaction, TransactionPayload } from '@multiversx/sdk-core/out'
 
 const Network: Network = 'devnet'
 const SignerWallet = 'test-server.pem'

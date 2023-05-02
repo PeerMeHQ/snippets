@@ -1,6 +1,6 @@
 import { Network } from '../shared/types'
 import { printSeparator, setup, timeout } from '../shared/helpers'
-import { Address, TokenIdentifierValue } from '@elrondnetwork/erdjs'
+import { Address, TokenIdentifierValue } from '@multiversx/sdk-core'
 
 // ts-node src/peerme/entities-check-nft-locking.ts
 

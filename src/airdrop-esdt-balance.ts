@@ -1,7 +1,7 @@
 import collect from 'collect.js'
 import BigNumber from 'bignumber.js'
 import { Network } from './shared/types'
-import { Address, TokenPayment } from '@elrondnetwork/erdjs'
+import { Address, TokenPayment } from '@multiversx/sdk-core'
 import { getArg, loadJsonData, loadSigner, printSeparator, setup, timeout } from './shared/helpers'
 
 const Network: Network = 'devnet'
@@ -44,11 +44,14 @@ const main = async () => {
       nonce: account.getNonceThenIncrement(),
       sender: account.address,
       receiver: new Address(receiver),
-      payment: payment,
+      tokenTransfer: payment,
       chainID: networkConfig.ChainID,
     })
 
-    await signer.sign(tx)
+    const serialized = tx.serializeForSigning()
+    const signature = await signer.sign(serialized)
+    tx.applySignature(signature)
+
     await provider.sendTransaction(tx)
 
     console.log(`sent ${payment.toPrettyString()} to ${receiver}`)

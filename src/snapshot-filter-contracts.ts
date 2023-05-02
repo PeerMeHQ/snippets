@@ -1,6 +1,6 @@
 import collect from 'collect.js'
 import { getArg, loadJsonData, saveJsonData } from './shared/helpers'
-import { Address } from '@elrondnetwork/erdjs/out'
+import { Address } from '@multiversx/sdk-core/out'
 
 // ts-node src/snapshot-filter-contracts.ts
 
@@ -13,7 +13,7 @@ const main = async () => {
   const contents = await (<Promise<string[]>>loadJsonData(inputFile))
 
   const filtered = collect(contents)
-    .reject(address => Address.fromBech32(address).isContractAddress())
+    .reject((address) => Address.fromBech32(address).isContractAddress())
     .all()
 
   saveJsonData(outputFile, filtered)

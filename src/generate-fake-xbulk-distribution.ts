@@ -1,5 +1,5 @@
 import { getArg } from './shared/helpers'
-import { Mnemonic } from '@elrondnetwork/erdjs-walletcore/out'
+import { Mnemonic } from '@multiversx/sdk-core-walletcore/out'
 
 // ts-node src/generate-fake-xbulk-distribution.ts {amount} {minValue} {maxValue}
 
@@ -10,10 +10,7 @@ const main = async () => {
 
   console.log(`generating fake distribution with ${amount} lines...`)
 
-  const generatePubKey = () =>
-    Mnemonic.generate()
-      .deriveKey(0)
-      .generatePublicKey()
+  const generatePubKey = () => Mnemonic.generate().deriveKey(0).generatePublicKey()
 
   const generateRandomValue = () => {
     const randomValue = Math.random() * (maxValue - minValue) + minValue
@@ -22,7 +19,7 @@ const main = async () => {
 
   const randomAddresses = Array.from({ length: amount })
     .map(generatePubKey)
-    .map(key => key.toAddress().bech32() + ',' + generateRandomValue().toString())
+    .map((key) => key.toAddress().bech32() + ',' + generateRandomValue().toString())
     .join('\n')
 
   console.log(randomAddresses)

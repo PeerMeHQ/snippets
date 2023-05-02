@@ -2,8 +2,8 @@ import path from 'path'
 import { Network } from './types'
 import { getConfig } from './config'
 import { readFileSync, writeFileSync } from 'fs'
-import { UserSigner } from '@elrondnetwork/erdjs-walletcore'
-import { ApiNetworkProvider } from '@elrondnetwork/erdjs-network-providers'
+import { UserSigner } from '@multiversx/sdk-wallet'
+import { ApiNetworkProvider } from '@multiversx/sdk-network-providers'
 import {
   Account,
   Address,
@@ -12,8 +12,8 @@ import {
   ResultsParser,
   SmartContract,
   ContractFunction,
-  TransactionFactory,
-} from '@elrondnetwork/erdjs'
+  TransferTransactionsFactory,
+} from '@multiversx/sdk-core'
 
 export const getArg = (index: number) => process.argv.slice(2)[index]
 
@@ -23,7 +23,7 @@ export const setup = async (network: Network) => {
   const networkConfig = await provider.getNetworkConfig()
 
   const gasEstimator = new GasEstimator()
-  const txFactory = new TransactionFactory(gasEstimator)
+  const txFactory = new TransferTransactionsFactory(gasEstimator)
 
   const querySc = async (address: string, func: string, args: TypedValue[]) => {
     const contract = new SmartContract({ address: new Address(address) })
@@ -76,7 +76,7 @@ export const timeout = async (milliseconds: number, log = true) => {
     console.log(`waiting for ${milliseconds / 1000} seconds...`)
   }
 
-  await new Promise(r => setTimeout(r, milliseconds))
+  await new Promise((r) => setTimeout(r, milliseconds))
 }
 
 export const printSeparator = () => console.log('--------------------------------------------------')
