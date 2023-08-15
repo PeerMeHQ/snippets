@@ -1,21 +1,21 @@
 {
-  "name": "superciety--snippets",
+  "name": "@peerme/snippets",
   "version": "1.0.0",
-  "description": "useful snippets for interacting with the elrond blockchain",
+  "description": "Useful snippets for interacting with the MultiversX blockchain.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/superciety/snippets.git"
+    "url": "git+https://github.com/PeerMeHQ/snippets.git"
   },
   "author": "micha vie",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/superciety/snippets/issues"
+    "url": "https://github.com/PeerMeHQ/snippets/issues"
   },
-  "homepage": "https://github.com/superciety/snippets#readme",
+  "homepage": "https://github.com/PeerMeHQ/snippets#readme",
   "dependencies": {
     "@multiversx/sdk-core": "12.1.0",
     "@multiversx/sdk-core-hw-provider": "^2.0.1",
