@@ -1,5 +1,5 @@
 import { getArg } from './shared/helpers'
-import { Mnemonic } from '@multiversx/sdk-core-walletcore/out'
+import { Mnemonic } from '@multiversx/sdk-wallet'
 
 // ts-node src/generate-fake-xbulk-distribution.ts {amount} {minValue} {maxValue}
 
