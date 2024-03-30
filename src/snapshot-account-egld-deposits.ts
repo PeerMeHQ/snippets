@@ -7,7 +7,7 @@ import { EgldDecimals } from './shared/constants'
 
 const Network: Network = 'mainnet'
 
-const AccountAddress: string = 'erd1t2mnpzg0kstjx0a0gf5v4lv7nkyscl03fysexsd760dy807y3m8skn6su2'
+const AccountAddress: string = ''
 
 type Address = string
 
@@ -28,11 +28,15 @@ const main = async () => {
       hasReachedEnd = true
     }
 
-    txs.forEach((tx: any) => {
-      const value = new BigNumber(tx.value)
-      const previous = entries[tx.sender] || new BigNumber(0)
-      entries[tx.sender] = previous.plus(value)
-    })
+    txs
+      .map((tx: any) => ({ ...tx, value: new BigNumber(tx.value) }))
+      .filter((tx: any) => tx.receiver === AccountAddress)
+      .filter((tx: any) => tx.value.isGreaterThan(0))
+      .forEach((tx: any) => {
+        const value = new BigNumber(tx.value)
+        const previous = entries[tx.sender] || new BigNumber(0)
+        entries[tx.sender] = previous.plus(value)
+      })
 
     console.log(`processed ${txs.length} transactions from page ${currentPage}`)
 
