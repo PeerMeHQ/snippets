@@ -33,9 +33,8 @@ const main = async () => {
       .filter((tx: any) => tx.receiver === AccountAddress)
       .filter((tx: any) => tx.value.isGreaterThan(0))
       .forEach((tx: any) => {
-        const value = new BigNumber(tx.value)
         const previous = entries[tx.sender] || new BigNumber(0)
-        entries[tx.sender] = previous.plus(value)
+        entries[tx.sender] = previous.plus(tx.value)
       })
 
     console.log(`processed ${txs.length} transactions from page ${currentPage}`)
