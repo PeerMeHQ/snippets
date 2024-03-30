@@ -71,6 +71,11 @@ export const saveJsonData = (filename: string, data: any) => {
   writeFileSync(output, jsoned, { encoding: 'utf8' })
 }
 
+export const saveRawData = (filename: string, data: any) => {
+  const output = path.join(__dirname, '..', '..', 'data', filename)
+  writeFileSync(output, data, { encoding: 'utf8' })
+}
+
 export const timeout = async (milliseconds: number, log = true) => {
   if (log) {
     console.log(`waiting for ${milliseconds / 1000} seconds...`)
