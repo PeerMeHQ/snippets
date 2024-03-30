@@ -1,7 +1,7 @@
 import { BigNumber } from 'bignumber.js'
 import { Network } from './shared/types'
-import { setup, timeout } from './shared/helpers'
 import { EgldDecimals } from './shared/constants'
+import { saveRawData, setup, timeout } from './shared/helpers'
 
 // ts-node src/snapshot-account-egld-deposits.ts
 
@@ -9,11 +9,17 @@ const Network: Network = 'mainnet'
 
 const AccountAddress: string = ''
 
-type Address = string
+const SnapshotFileName = 'snapshot-account-egld-deposits.csv'
+
+type Tx = {
+  hash: string
+  sender: string
+  value: BigNumber
+}
 
 const main = async () => {
   const { provider } = await setup(Network)
-  const entries: Record<Address, BigNumber> = {}
+  const entries: Tx[] = []
   let hasReachedEnd = false
   let currentPage = 0
 
@@ -33,8 +39,11 @@ const main = async () => {
       .filter((tx: any) => tx.receiver === AccountAddress)
       .filter((tx: any) => tx.value.isGreaterThan(0))
       .forEach((tx: any) => {
-        const previous = entries[tx.sender] || new BigNumber(0)
-        entries[tx.sender] = previous.plus(tx.value)
+        entries.push({
+          hash: tx.txHash,
+          sender: tx.sender,
+          value: tx.value,
+        })
       })
 
     console.log(`processed ${txs.length} transactions from page ${currentPage}`)
@@ -43,12 +52,13 @@ const main = async () => {
     await timeout(1000)
   }
 
-  const output = Object.entries(entries)
-    .map(([address, value]) => [address, value.shiftedBy(-EgldDecimals).decimalPlaces(6).toNumber()])
-    .map(([address, value]) => `${address},${value}`)
+  const data = entries
+    .reverse()
+    .map((tx) => ({ ...tx, value: tx.value.shiftedBy(-EgldDecimals).decimalPlaces(6).toNumber() }))
+    .map((tx) => `${tx.hash},${tx.sender},${tx.value},${+tx.value * 470_000},${+tx.value * 470_000 * 0.2}`)
     .join('\n')
 
-  console.log(output)
+  saveRawData(SnapshotFileName, data)
 }
 
 main()
