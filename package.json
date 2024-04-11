@@ -20,6 +20,7 @@
     "@multiversx/sdk-core": "12.1.0",
     "@multiversx/sdk-network-providers": "^1.4.0",
     "@multiversx/sdk-wallet": "^4.4.0",
+    "@peerme/sdk": "^0.2.1",
     "bignumber.js": "^9.1.1",
     "collect.js": "^4.36.1",
     "fs": "^0.0.1-security",
